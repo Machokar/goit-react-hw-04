@@ -1,10 +1,10 @@
-import toast from "react-hot-toast";
-
+import toast from 'react-hot-toast';
+import css from './Searchbar.module.css';
 export const SearchBars = ({ onsearch }) => {
-  const hundelbutton = (event) => {
+  const hundelbutton = event => {
     event.preventDefault();
-    if (event.target.elements.query.value.trim() === "") {
-      toast.error("EMPTY STRING");
+    if (event.target.elements.query.value.trim() === '') {
+      toast.error('EMPTY STRING');
 
       return;
     }
@@ -13,15 +13,17 @@ export const SearchBars = ({ onsearch }) => {
   };
   return (
     <header>
-      <form onSubmit={hundelbutton}>
+      <form onSubmit={hundelbutton} className={css.form}>
         <input
           type="text"
-          autocomplete="off"
+          className={css.input}
           name="query"
           autofocus
           placeholder="Search images and photos"
         />
-        <button type="submit">Search</button>
+        <button className={css.button} type="submit">
+          Search
+        </button>
       </form>
     </header>
   );
