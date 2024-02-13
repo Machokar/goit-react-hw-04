@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Toaster } from 'react-hot-toast';
 import './App.css';
 import { SearchBars } from './SearchBar/SearchBar';
 import { ImageGal } from './ImageGallery/ImageGallery';
@@ -45,7 +44,6 @@ export const App = () => {
       {error && <ErrorMessage />}
       {pictures.length > 0 && <ImageGal pictures={pictures} />}
       {pictures.length > 0 && !loading && endlist && <LoadMoreBtn loadmaor={handelloadmore} />}
-      <Toaster position="bottom-center" reverseOrder={false} />
     </>
   );
 };
