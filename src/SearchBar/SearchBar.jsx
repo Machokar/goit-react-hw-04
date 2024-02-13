@@ -1,13 +1,13 @@
-// import toast from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import css from './Searchbar.module.css';
 export const SearchBars = ({ onsearch }) => {
   const hundelbutton = event => {
     event.preventDefault();
-    // if (event.target.elements.query.value.trim() === '') {
-    //   toast.error('EMPTY STRING');
+    if (event.target.elements.query.value.trim() === '') {
+      toast.error('EMPTY STRING');
 
-    //   return;
-    // }
+      return;
+    }
     onsearch(event.target.elements.query.value);
     event.target.reset();
   };
