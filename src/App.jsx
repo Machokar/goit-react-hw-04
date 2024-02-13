@@ -11,6 +11,7 @@ import { fetchArticle } from './api';
 export const App = () => {
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
+  const [showLoadMore, setShowLoadMore] = useState(false);
   const [pictures, setPictures] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -26,9 +27,10 @@ export const App = () => {
       try {
         setError(false);
         setLoading(true);
-        const Fetchdata = await fetchArticle(query, page);
-        console.log(Fetchdata);
-        setPictures(prevPictures => [...prevPictures, ...Fetchdata.results]);
+        const { results, total_pages } = await fetchArticle(query, page);
+        console.log(total_pages);
+        setPictures(prevPictures => [...prevPictures, ...results]);
+        setShowLoadMore(total_pages !== page);
       } catch (error) {
         setError(true);
       } finally {
