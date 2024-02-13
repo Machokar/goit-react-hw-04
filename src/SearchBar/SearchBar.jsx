@@ -18,7 +18,6 @@ export const SearchBars = ({ onsearch }) => {
           type="text"
           className={css.input}
           name="query"
-          autofocus
           placeholder="Search images and photos"
         />
         <button className={css.button} type="submit">
