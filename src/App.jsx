@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import './App.css';
 import { SearchBars } from './SearchBar/SearchBar';
 import { ImageGal } from './ImageGallery/ImageGallery';
