@@ -20,7 +20,7 @@ export const SearchBars = ({ onsearch }) => {
           name="query"
           placeholder="Search images and photos"
         />
-        <button className={css.button} type="submit">
+        <button className={css.button_header} type="submit">
           Search
         </button>
       </form>

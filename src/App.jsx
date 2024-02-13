@@ -11,7 +11,7 @@ import { fetchArticle } from './api';
 export const App = () => {
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
-  const [showLoadMore, setShowLoadMore] = useState(false);
+  const [endlist, setEndlist] = useState(false);
   const [pictures, setPictures] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -30,7 +30,7 @@ export const App = () => {
         const { results, total_pages } = await fetchArticle(query, page);
         console.log(total_pages);
         setPictures(prevPictures => [...prevPictures, ...results]);
-        setShowLoadMore(total_pages !== page);
+        setEndlist(total_pages !== page);
       } catch (error) {
         setError(true);
       } finally {
@@ -45,7 +45,7 @@ export const App = () => {
       {loading && <Loader />}
       {error && <ErrorMessage />}
       {pictures.length > 0 && <ImageGal pictures={pictures} />}
-      {pictures.length > 0 && !loading && <LoadMoreBtn loadmaor={handelloadmore} />}
+      {pictures.length > 0 && !loading && endlist && <LoadMoreBtn loadmaor={handelloadmore} />}
       <Toaster position="bottom-center" reverseOrder={false} />
     </>
   );
