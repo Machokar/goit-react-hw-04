@@ -1,6 +1,7 @@
 import css from './Loader.module.css';
 import { Rings } from 'react-loader-spinner';
 export const Loader = () => {
+  console.log();
   return (
     <div className={css.loader}>
       <Rings

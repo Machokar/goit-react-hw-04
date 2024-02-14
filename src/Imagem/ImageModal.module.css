@@ -1,0 +1,9 @@
+.area {
+  position: absolute;
+  inset: 80px;
+  background: transparent;
+  overflow: hidden;
+  border-radius: 4px;
+  outline: none;
+  border-radius: 5%;
+}

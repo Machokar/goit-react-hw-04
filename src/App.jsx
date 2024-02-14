@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import './App.css';
 import { SearchBars } from './SearchBar/SearchBar';
@@ -7,6 +7,7 @@ import { Loader } from './Loaderbox/Loader';
 import { ErrorMessage } from './ErrorMessage/ErrorMessage';
 import { LoadMoreBtn } from './LoadMoreBtn/LoadMoreBtn';
 import { fetchArticle } from './api';
+import { ImageModal } from './Imagem/ImageModal';
 
 export const App = () => {
   const [query, setQuery] = useState('');
@@ -15,14 +16,26 @@ export const App = () => {
   const [pictures, setPictures] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const onsearch = async query => {
+  const [modalUrl, setModalUrl] = useState('');
+
+  const handleOpen = url => {
+    setModalUrl(url);
+  };
+
+  const handleClose = () => {
+    setModalUrl('');
+  };
+
+  const searchPhoto = async query => {
     setQuery(query);
     setPictures([]);
     setPage(1);
   };
+
   const handleLoadMore = () => {
     setPage(page + 1);
   };
+
   useEffect(() => {
     if (query === '') {
       return;
@@ -42,14 +55,16 @@ export const App = () => {
     }
     fetchData();
   }, [query, page]);
+
   return (
     <>
-      <SearchBars onsearch={onsearch} />
+      <SearchBars searchPhoto={searchPhoto} />
       {loading && <Loader />}
       {error && <ErrorMessage errorText={`Something went wrong... ${error}. Please try again.`} />}
-      {pictures.length > 0 && <ImageGallery images={pictures} />}
+      {pictures.length > 0 && <ImageGallery images={pictures} handleClick={handleOpen} />}
       {pictures.length > 0 && !loading && endlist && <LoadMoreBtn onLoadMore={handleLoadMore} />}
       <Toaster position="bottom-center" reverseOrder={false} />
+      {modalUrl && <ImageModal url={modalUrl} onClose={handleClose} />}
     </>
   );
 };

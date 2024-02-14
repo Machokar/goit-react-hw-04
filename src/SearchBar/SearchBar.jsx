@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 import css from './Searchbar.module.css';
-export const SearchBars = ({ onsearch }) => {
+export const SearchBars = ({ searchPhoto }) => {
   const hundelbutton = event => {
     event.preventDefault();
     if (event.target.elements.query.value.trim() === '') {
@@ -8,7 +8,7 @@ export const SearchBars = ({ onsearch }) => {
 
       return;
     }
-    onsearch(event.target.elements.query.value);
+    searchPhoto(event.target.elements.query.value);
     event.target.reset();
   };
   return (
