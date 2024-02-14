@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import './App.css';
 import { SearchBars } from './SearchBar/SearchBar';
-import { ImageGal } from './ImageGallery/ImageGallery';
+import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Loader } from './Loaderbox/Loader';
 import { ErrorMessage } from './ErrorMessage/ErrorMessage';
 import { LoadMoreBtn } from './LoadMoreBtn/LoadMoreBtn';
@@ -16,13 +16,16 @@ export const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const onsearch = async query => {
-    setQuery(query);
+    setQuery(`${Date.now()}/${query}`);
     setPictures([]);
   };
-  const handelloadmore = () => {
+  const handleLoadMore = () => {
     setPage(page + 1);
   };
   useEffect(() => {
+    if (query === '') {
+      return;
+    }
     async function fetchData() {
       try {
         setError(false);
@@ -42,9 +45,9 @@ export const App = () => {
     <>
       <SearchBars onsearch={onsearch} />
       {loading && <Loader />}
-      {error && <ErrorMessage />}
-      {pictures.length > 0 && <ImageGal pictures={pictures} />}
-      {pictures.length > 0 && !loading && endlist && <LoadMoreBtn loadmaor={handelloadmore} />}
+      {error && <ErrorMessage errorText={`Something went wrong... ${error}. Please try again.`} />}
+      {pictures.length > 0 && <ImageGallery pictures={pictures} />}
+      {pictures.length > 0 && !loading && endlist && <LoadMoreBtn loadmaor={handleLoadMore} />}
       <Toaster position="bottom-center" reverseOrder={false} />
     </>
   );

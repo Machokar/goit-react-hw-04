@@ -1,7 +1,7 @@
-export const ErrorMessage = () => {
+export const ErrorMessage = ({ errorText }) => {
   return (
     <div>
-      <p>Try reloading the page</p>
+      <p>{errorText}</p>
     </div>
   );
 };

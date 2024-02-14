@@ -1,15 +1,16 @@
-import { Audio } from 'react-loader-spinner';
+import css from './Loader.module.css';
+import { Rings } from 'react-loader-spinner';
 export const Loader = () => {
   return (
-    <div>
-      <Audio
-        height="40"
-        width="40"
-        radius="9"
-        color="green"
-        ariaLabel="three-dots-loading"
-        wrapperStyle
-        wrapperClass
+    <div className={css.loader}>
+      <Rings
+        visible={true}
+        height="80"
+        width="80"
+        color="#4fa94d"
+        ariaLabel="rings-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
       />
     </div>
   );

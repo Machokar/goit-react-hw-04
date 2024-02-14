@@ -7,7 +7,7 @@ export const ImageCard = ({ pictures }) => {
     setShowModal(prevModal => !prevModal);
   };
   return (
-    <div>
+    <li>
       <img
         onClick={button}
         className={css.box}
@@ -16,6 +16,6 @@ export const ImageCard = ({ pictures }) => {
       />
 
       <ImageModal image={pictures.urls.regular} modalIsOpen={showModal} closeModal={button} />
-    </div>
+    </li>
   );
 };

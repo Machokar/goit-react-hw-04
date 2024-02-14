@@ -11,16 +11,20 @@ const customStyles = {
   },
 };
 Modal.setAppElement('#root');
-export const ImageModal = ({ image, alt_description, modalIsOpen, closeModal }) => {
+export const ImageModal = ({ image, altText, modalIsOpen, closeModal }) => {
+  if (image === '') {
+    console.log('Error');
+    return;
+  }
   return (
     <Modal
-      className={css.model}
+      className={css.area}
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <img src={image} alt={alt_description} />
+      <img src={image} alt={altText} />
     </Modal>
   );
 };
