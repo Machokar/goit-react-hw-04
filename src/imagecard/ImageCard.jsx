@@ -1,21 +1,43 @@
-import { ImageModal } from '../Imagem/ImageModal';
 import { useState } from 'react';
 import css from './ImageCard.module.css';
-export const ImageCard = ({ pictures }) => {
+import Modal from 'react-modal';
+export const ImageCard = ({ image }) => {
   const [showModal, setShowModal] = useState(false);
-  const button = () => {
+  const handleClick = () => {
     setShowModal(prevModal => !prevModal);
   };
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+  if (image === '') {
+    console.log('Error');
+    return;
+  }
+  Modal.setAppElement('#root');
   return (
     <li>
       <img
-        onClick={button}
+        onClick={handleClick}
         className={css.box}
-        src={pictures.urls.small}
-        alt={pictures.alt_description}
+        src={image.urls.small}
+        alt={image.alt_description}
       />
-
-      <ImageModal image={pictures.urls.regular} modalIsOpen={showModal} closeModal={button} />
+      <Modal
+        className={css.area}
+        isOpen={showModal}
+        onRequestClose={handleClick}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <img src={image.urls.regular} alt={image.alt_description} />
+      </Modal>
     </li>
   );
 };

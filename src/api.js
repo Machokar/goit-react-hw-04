@@ -4,7 +4,7 @@ export const fetchArticle = async (query, page) => {
   const { data } = await axios.get(`https://api.unsplash.com/search/photos`, {
     params: {
       client_id: API_KEY,
-      query: query.split('/')[1],
+      query,
       page,
       per_page: 20,
     },

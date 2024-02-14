@@ -16,8 +16,9 @@ export const App = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const onsearch = async query => {
-    setQuery(`${Date.now()}/${query}`);
+    setQuery(query);
     setPictures([]);
+    setPage(1);
   };
   const handleLoadMore = () => {
     setPage(page + 1);
@@ -32,6 +33,7 @@ export const App = () => {
         setLoading(true);
         const { results, total_pages } = await fetchArticle(query, page);
         setPictures(prevPictures => [...prevPictures, ...results]);
+        console.log(results);
         setEndlist(total_pages !== page);
       } catch (error) {
         setError(true);
@@ -46,8 +48,8 @@ export const App = () => {
       <SearchBars onsearch={onsearch} />
       {loading && <Loader />}
       {error && <ErrorMessage errorText={`Something went wrong... ${error}. Please try again.`} />}
-      {pictures.length > 0 && <ImageGallery pictures={pictures} />}
-      {pictures.length > 0 && !loading && endlist && <LoadMoreBtn loadmaor={handleLoadMore} />}
+      {pictures.length > 0 && <ImageGallery images={pictures} />}
+      {pictures.length > 0 && !loading && endlist && <LoadMoreBtn onLoadMore={handleLoadMore} />}
       <Toaster position="bottom-center" reverseOrder={false} />
     </>
   );

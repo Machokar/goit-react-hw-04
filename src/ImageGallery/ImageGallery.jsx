@@ -1,11 +1,11 @@
 import css from './ImageGallery.module.css';
 import { ImageCard } from '../imagecard/ImageCard';
 
-export const ImageGallery = ({ pictures }) => {
+export const ImageGallery = ({ images }) => {
   return (
     <ul className={css.box}>
-      {pictures.map(pictures => (
-        <ImageCard pictures={pictures} key={pictures.id} />
+      {images.map(images => (
+        <ImageCard image={images} key={images.id} />
       ))}
     </ul>
   );
