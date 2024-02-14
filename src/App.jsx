@@ -33,7 +33,6 @@ export const App = () => {
         setLoading(true);
         const { results, total_pages } = await fetchArticle(query, page);
         setPictures(prevPictures => [...prevPictures, ...results]);
-        console.log(results);
         setEndlist(total_pages !== page);
       } catch (error) {
         setError(true);
